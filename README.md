@@ -1,4 +1,4 @@
-This is a project created during Rocketseat's event Next Level Week 5th edition.
+This project was created during Rocketseat's event Next Level Week 5th edition.
 
 ## Specs
 
