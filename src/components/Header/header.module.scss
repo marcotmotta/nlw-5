@@ -1,0 +1,20 @@
+.header {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border: solid 1px var(--gray-100);
+
+    .title {
+        margin-left: 2rem;
+    }
+
+    .description {
+        margin-left: 2rem;
+    }
+
+    .date {
+        margin-left: auto;
+        margin-right: 2rem;
+        text-transform: capitalize;
+    }
+}
