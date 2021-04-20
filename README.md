@@ -1,4 +1,4 @@
-This project was created during Rocketseat's event Next Level Week 5th edition.
+This project was created during Rocketseat's event Next Level Week 5th edition as part of the React and Next.js track.
 
 ## Specs
 
