@@ -9,6 +9,8 @@ import Link from 'next/link'
 import styles from './home.module.scss'
 
 import { PlayCircleFilled } from '@material-ui/icons';
+import { useContext } from 'react'
+import { PlayerContext } from '../contexts/PlayerContext'
 
 type Episode = {
     id: string,
@@ -27,6 +29,8 @@ type HomeProps = {
 }
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
+    const { play } = useContext(PlayerContext);
+
     return (
         <div className={styles.home}>
             <section className={styles.latestEpisodes}>
@@ -57,7 +61,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                                         <p className={styles.duration}>
                                         {episode.publishedAt} | {episode.durationAsString}
                                         </p>
-                                        <PlayCircleFilled className={styles.playButton} fontSize="large" />
+                                        <PlayCircleFilled onClick={() => play(episode)} className={styles.playButton} fontSize="large" />
                                     </div>
                                 </div>
                             </li>
@@ -99,7 +103,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                                      <td>{episode.members}</td>
                                      <td style={{width: 100}}>{episode.publishedAt}</td>
                                      <td>{episode.durationAsString}</td>
-                                     <td><PlayCircleFilled className={styles.playButton} fontSize="large" /></td>
+                                     <td><PlayCircleFilled onClick={() => play(episode)} className={styles.playButton} fontSize="large" /></td>
                                  </tr>
                             )
                         })}
