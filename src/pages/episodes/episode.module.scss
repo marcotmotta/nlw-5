@@ -1,0 +1,73 @@
+.episode {
+    max-width: 45rem;
+    padding: 3rem 2rem;
+    margin: 0 auto;
+
+    .thumbnail {
+        position: relative;
+
+        img {
+            border-radius: 1rem;
+        }
+
+        .backBtn,
+        .playBtn {
+            position: absolute;
+            transition: filter 0.3s;
+            color: var(--white);
+            border-radius: 0.5rem;
+            font-size: 300%;
+            top: 50%;
+
+            &:hover {
+                cursor: pointer;
+                filter: brightness(0.8);
+            }
+            z-index: 5;
+        }
+
+        .backBtn {
+            background: var(--purple-500);
+            left: 0;
+            transform: translate(-50%, -50%);
+        }
+
+        .playBtn {
+            background: var(--green-500);
+            right: 0;
+            transform: translate(+50%, -50%);
+        }
+    }
+
+    header {
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--gray-100);
+
+        h1 {
+            margin-top: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        span {
+            display: inline-block;
+            font-size: 0.875rem;
+
+            //pega todos os spans que tenham outro span antes dele (todos menos o primeiro)
+            & + span {
+                margin-left: 1rem;
+                padding-left: 1rem;
+                position: relative;
+            }
+        }
+    }
+
+    .description {
+        margin-top: 2rem;
+        line-height: 1.675rem;
+        color: var(--gray-800);
+
+        p {
+            margin: 1.5rem 0;
+        }
+    }
+}
