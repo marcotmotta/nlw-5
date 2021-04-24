@@ -1,0 +1,7 @@
+next steps:
+
+responsive
+pwa
+dark theme
+
+electron (haha)
