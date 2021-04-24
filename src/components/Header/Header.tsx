@@ -11,10 +11,10 @@ export default function Header() {
     return (
         <div className={styles.header}>
             <h1 className={styles.title}>
-                Hello
+                Podcastr
             </h1>
             <p className={styles.description}>
-                Hello friends form the internet
+                An app to listen to podcasts anywhere. Developed during the Next Levet Week 5th Edition.
             </p>
             <p className={styles.date}>
                 {date}

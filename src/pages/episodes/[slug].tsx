@@ -1,14 +1,17 @@
 import { format, parseISO } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import Image from 'next/image';
+import Link from 'next/link';
+import Head from 'next/head';
+
 import { api } from '../../services/api';
 import { convertDurationToTime } from '../../utils/convertDurationToTime';
-import Image from 'next/image';
+import { usePlayer } from '../../contexts/PlayerContext';
 
 import styles from './episode.module.scss';
 
 import { ArrowBack, PlayArrow } from '@material-ui/icons';
-import Link from 'next/link';
 
 type Episode = {
     id: string,
@@ -16,7 +19,7 @@ type Episode = {
     thumbnail: string,
     members: string,
     publishedAt: string,
-    duration: string,
+    duration: number,
     durationAsString: string,
     description: string,
     url: string
@@ -27,8 +30,13 @@ type EpisodeProps = {
 }
 
 export default function Episode({ episode }: EpisodeProps) {
+    const { play } = usePlayer();
+
     return (
         <div className={styles.episode}>
+            <Head>
+                <title>{episode.title} | Podcastr</title>
+            </Head>
             <div className={styles.thumbnail}>
                 <Link href="/">
                     <ArrowBack className={styles.backBtn} fontSize="large" />
@@ -39,7 +47,11 @@ export default function Episode({ episode }: EpisodeProps) {
                     src={episode.thumbnail}
                     objectFit="cover"
                 />
-                <PlayArrow className={styles.playBtn} fontSize="large" />
+                <PlayArrow
+                    onClick={() => play(episode)}
+                    className={styles.playBtn}
+                    fontSize="large"
+                />
             </div>
 
             <header>
@@ -49,7 +61,10 @@ export default function Episode({ episode }: EpisodeProps) {
                 <span>{episode.durationAsString}</span>
             </header>
 
-            <div className={styles.description} dangerouslySetInnerHTML={{__html: episode.description}}></div>
+            <div
+                className={styles.description}
+                dangerouslySetInnerHTML={{__html: episode.description}}
+            />
         </div>
     )
 }

@@ -5,12 +5,12 @@ import { api } from '../services/api'
 import { convertDurationToTime } from '../utils/convertDurationToTime'
 import Image from 'next/image'
 import Link from 'next/link'
+import Head from 'next/head'
 
 import styles from './home.module.scss'
 
 import { PlayCircleFilled } from '@material-ui/icons';
-import { useContext } from 'react'
-import { PlayerContext } from '../contexts/PlayerContext'
+import { usePlayer } from '../contexts/PlayerContext'
 
 type Episode = {
     id: string,
@@ -18,7 +18,7 @@ type Episode = {
     thumbnail: string,
     members: string,
     publishedAt: string,
-    duration: string,
+    duration: number,
     durationAsString: string,
     url: string
 }
@@ -29,14 +29,19 @@ type HomeProps = {
 }
 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
-    const { play } = useContext(PlayerContext);
+    const { playList } = usePlayer();
+
+    const episodeList = [...latestEpisodes, ...allEpisodes]
 
     return (
         <div className={styles.home}>
+            <Head>
+                <title>Home | Podcastr</title>
+            </Head>
             <section className={styles.latestEpisodes}>
                 <h2>Últimos episódios</h2>
                 <ul>
-                    {latestEpisodes.map(episode => {
+                    {latestEpisodes.map((episode, index) => {
                         return (
                             <li key={episode.id} className={styles.episode}>
                                 <Image
@@ -61,7 +66,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                                         <p className={styles.duration}>
                                         {episode.publishedAt} | {episode.durationAsString}
                                         </p>
-                                        <PlayCircleFilled onClick={() => play(episode)} className={styles.playButton} fontSize="large" />
+                                        <PlayCircleFilled onClick={() => playList(episodeList, index)} className={styles.playButton} fontSize="large" />
                                     </div>
                                 </div>
                             </li>
@@ -83,7 +88,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                         </tr>
                     </thead>
                     <tbody>
-                        {allEpisodes.map(episode => {
+                        {allEpisodes.map((episode, index) => {
                             return(
                                  <tr key={episode.id}>
                                      <td style={{width: 72}}>
@@ -103,7 +108,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                                      <td>{episode.members}</td>
                                      <td style={{width: 100}}>{episode.publishedAt}</td>
                                      <td>{episode.durationAsString}</td>
-                                     <td><PlayCircleFilled onClick={() => play(episode)} className={styles.playButton} fontSize="large" /></td>
+                                     <td><PlayCircleFilled onClick={() => playList(episodeList, index + latestEpisodes.length)} className={styles.playButton} fontSize="large" /></td>
                                  </tr>
                             )
                         })}

@@ -73,10 +73,15 @@
 
                     &:disabled {
                         cursor: default;
+                        opacity: 0.5;
                     }
 
                     &:hover:not(:disabled) {
                         filter: brightness(0.8);
+                    }
+
+                    &.isActive {
+                        color: var(--green-500);
                     }
                 }
 
@@ -90,7 +95,7 @@
                 .progressBar {
                     margin-left: 20px;
                     margin-right: 20px;
-                    width: 60%;
+                    width: 40%;
                     background: transparent;
                     color: white;
                 }
